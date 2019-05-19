@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}New topic {% endblock %}
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/md.css' %}">
+{% endblock %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Boards</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'board_topics' board.pk %}">{{ board.name }}</a></li>
+    <li class="breadcrumb-item active">New topic</li>
+{% endblock %}
+
+{% block content %}
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {% include 'include/form.html' %}
+        <button type="submit" class="btn btn-success">Post</button>
+    </form>
+{% endblock %}
+{% block js %}
+<script src="{% static 'js/md.js' %}"></script>
+<script>
+    var simplemde = new SimpleMDE();
+</script>
+{% endblock %}
